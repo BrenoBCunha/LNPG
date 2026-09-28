@@ -1,0 +1,15 @@
+1. No Python, `//` faz **divisão inteira**, descartando a parte decimal. Em C, se `a` e `b` forem `int`, o operador `/` já faz divisão inteira.
+
+2. Em `c * (9 / 5)`, como `9` e `5` são inteiros, `9 / 5` resulta em `1`. Assim, a expressão vira `c * 1`, dando um resultado incorreto para a conversão de temperatura. O correto é `c * 9 / 5 + 32`.
+
+3. Python possui os valores booleanos `True` e `False`. Em C, uma comparação normalmente resulta em **1 para verdadeiro** e **0 para falso**.
+
+4. Ao executar gcc -S para o código 01_idade.c localizei a subtração da idade pelo ano no seguinte trecho:
+    
+    ```nasm
+    movl    -16(%rbp), %edx
+    movl    -12(%rbp), %eax
+    subl    %edx, %eax
+    ```
+    
+    em subl ele realiza a operação de subtração entre os valores acolados em %edx e %eax
