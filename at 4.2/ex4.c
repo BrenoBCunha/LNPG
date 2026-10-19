@@ -23,3 +23,12 @@ int main(void){
 
     return 0;
 }
+
+
+/*
+Pergunta: qual versão usa mais memória e por quê?
+
+Resposta: A versão recursiva utiliza mais memória, 
+pois cria um novo quadro na pilha para cada chamada da função, acumulando até n quadros. 
+Já a versão iterativa utiliza memória constante, pois executa um laço sem criar novas chamadas de função.
+*/

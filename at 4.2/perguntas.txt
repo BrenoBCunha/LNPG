@@ -1,0 +1,38 @@
+1. No exercício 2, explique por que a troca só funciona por referência.
+
+- Porque a passagem por referência permite que a função acesse e modifique diretamente os valores das variáveis originais por meio de seus endereços de memória. Na passagem por valor, a função recebe apenas cópias, e as alterações não afetam as variáveis originais.
+
+2. No exercício 4, com n = 5 , desenhe os quadros da soma_rec sendo empilhados e desempilhados
+(como no interativo da unidade).
+
+ - soma_rec(5)
+    |
+    ── soma_rec(4)
+            |
+            ── soma_rec(3)
+                    |
+                    ── soma_rec(2)
+                            |
+                            ── soma_rec(1) ← Caso-base
+
+soma_rec(1) = 1
+     |
+soma_rec(2) = 2 + 1  = 3
+     |
+soma_rec(3) = 3 + 3  = 6
+     |
+soma_rec(4) = 4 + 6  = 10
+     |
+soma_rec(5) = 5 + 10 = 15
+
+3. No exercício 6, cole o erro que aparece quando você esquece mathlib.o na ligação e explique, em
+uma frase, o que o ligador estava reclamando.
+
+ - Ao executar gcc main.o -o app o erro foi:
+
+ "/usr/bin/ld: main.o: in function `main':
+main.c:(.text+0xf): undefined reference to `maior'
+/usr/bin/ld: main.c:(.text+0x2f): undefined reference to `fatorial'
+collect2: error: ld returned 1 exit status"
+
+O ligador reclama que não encontrou as implementações das funções maior e fatorial, pois elas estão no arquivo mathlib.o, que não foi incluído na ligação.
