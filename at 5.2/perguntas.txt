@@ -1,0 +1,10 @@
+1. No exercício 2, por que dobra consegue alterar o vetor do main sem return ?
+    A função dobra consegue alterar o vetor do main porque recebe um ponteiro para o primeiro elemento do, permitindo modificar diretamente seus valores na memória, sem precisar de return.
+2. No exercício 5, cole dois endereços consecutivos de int e mostre a diferença em bytes.
+    Dois endereços consecutivos do vetor int:
+    v[0] = 0x7ffdc03f37d0
+    v[1] = 0x7ffdc03f37d4
+    A diferença é 0xd4 -0xd0 = 4 bytes, correspondente ao tamanho de um int.
+3. No exercício 6, explique em uma frase o que o AddressSanitizer detectou e por que, sem ele, o erro
+poderia passar despercebido.
+    O AddressSanitizer detectou um stack-buffer-overflow causado pelo acesso à posição inválida v[10]; sem ele, o erro poderia passar despercebido por não haver verificação automática dos limites do vetor, embora, neste exercício, tenha sido detectado um stack smashing mesmo sem o sanitizer.
