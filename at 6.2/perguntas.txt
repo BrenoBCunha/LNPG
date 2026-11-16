@@ -1,0 +1,8 @@
+Quais bugs o compilador pega sozinho (com -Wall -Wextra )? Quais só aparecem ao rodar (ou com
+uma ferramenta como o AddressSanitizer/Valgrind)?
+Regra de ouro do heap: para cada malloc , um free — nem a menos (vaza, como no L4), nem
+usando depois de liberar (L5). Releia por essa lente os itens 6, 8 e 11 da Parte A e os labs L4/L5.
+
+- compilador realiza uma análise estática do código, identificando problemas sem precisar executá-lo. Já ferramentas como AddressSanitizer e Valgrind analisam o comportamento do programa durante sua execução, permitindo identificar erros de gerenciamento de memória.
+
+-Wall -Wextra não garantem a detecção de todos os erros, e as ferramentas de execução só conseguem identificar determinados problemas quando os caminhos de código que os provocam são executados.
