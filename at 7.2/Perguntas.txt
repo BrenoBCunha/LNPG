@@ -1,0 +1,25 @@
+Quais bugs o compilador pega sozinho (itens 2, 4, 6)? Quais só aparecem ao raciocinar sobre a
+memória (itens 7, 8) ou ao rodar (item 11 vira warning)?
+
+Resposta:   Os itens 2, 4 e 6 apresentam erros que o compilador identifica:
+            - Item 2: usar p.x quando p é um ponteiro. Usar p->x.
+            - Item 4: comparar structs com ==, operação não permitida em C.	Comparar os campos: a.x == b.x && a.y == b.y.
+            - Item 6: acessar c.numero, embora numero pertença à struct interna. Usar c.ender.numero.
+
+            Os itens 7 e 8 normalmente compilam, mas exigem compreender a memória:
+            - Item 7: os campos da union compartilham os mesmos bytes. Em little-endian, ler t.c após atribuir 1545 (0x0609) a t.x resulta em 9.
+            - Item 8: escrever em v.i e ler v.f interpreta os mesmos bits como outro tipo. Isso não realiza uma conversão numérica de inteiro para float.
+            - Item 11: retornar o endereço de uma variável local costuma gerar um warning. Quando a função termina, a variável deixa de existir. Acessá-la pelo ponteiro causa comportamento indefinido: pode produzir valores incorretos ou encerrar o programa, sem garantia de falha visível.
+
+struct × union : a mesma sintaxe, memórias opostas — some (struct) × compartilha (union).
+
+Resposta:   Em uma struct, cada campo ocupa seu próprio espaço, e o tamanho inclui eventuais bytes de padding. Em uma union, os campos compartilham armazenamento; seu tamanho comporta o maior campo e também respeita o alinhamento.
+
+A ordem dos campos importa: declare do maior para o menor alinhamento para gastar menos
+padding (L5). Num array de milhões de structs, isso é memória de verdade.
+
+Reposta:    No L5, reordenar os campos reduz o padding:
+            Ruim -> Dados = 6 bytes -> Padding = 6 bytes -> Total =	12 bytes
+            Bom	-> Dados = 6 bytes -> Padding =	2 bytes -> Total = 8 bytes
+
+            Nesse ambiente, a economia é de 4 bytes por elemento, ou 4 MB em um array de um milhão de structs.
